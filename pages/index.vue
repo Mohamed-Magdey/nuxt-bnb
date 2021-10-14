@@ -2,7 +2,9 @@
   <v-container fluid>
     <v-row>
       <v-col v-for="home in homes" :key="home.objectID" cols="3">
-        <home-card :home="home" />
+        <nuxt-link :to="`/home/${home.objectID}`" prefetch>
+          <home-card :home="home" />
+        </nuxt-link>
       </v-col>
     </v-row>
   </v-container>
