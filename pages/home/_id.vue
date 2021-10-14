@@ -33,7 +33,16 @@
       <img src="/images/star.svg" width="20" height="20" />{{ home.reviewValue
       }}<br />
       {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds,
-      {{ home.bathrooms }} bath
+      {{ home.bathrooms }} bath<br />
+      {{ home.description }}
+    </div>
+    <div ref="myMap" style="height: 800px; width: 800px">
+      <client-only>
+        <l-map :zoom="zoom" :center="center" :options="options">
+          <l-tile-layer :url="url"></l-tile-layer>
+          <l-marker :lat-lng="markerLatLng"></l-marker>
+        </l-map>
+      </client-only>
     </div>
   </v-container>
 </template>
@@ -45,12 +54,23 @@ export default {
   data() {
     return {
       home: {},
+      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      zoom: 18,
+      center: {},
+      markerLatLng: {},
+      options: {
+        zoomControl: false,
+      },
     }
   },
   head() {
     return {
       title: this.home.title,
     }
+  },
+  mounted() {
+    this.center = this.home._geoloc
+    this.markerLatLng = this.home._geoloc
   },
   created() {
     const home = homes.find((home) => home.objectID === this.$route.params.id)
