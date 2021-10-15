@@ -1,6 +1,10 @@
 <template>
-  <p v-if="$fetchState.pending">Fetching mountains...</p>
-  <p v-else-if="$fetchState.error">An error occurred :(</p>
+  <v-container v-if="$fetchState.pending" fluid>
+    Fetching mountains...
+  </v-container>
+  <v-container v-else-if="$fetchState.error" fluid>
+    <error :error="$fetchState.error" />
+  </v-container>
   <v-container v-else fluid>
     <v-row>
       <v-col class="d-flex">
@@ -66,11 +70,24 @@ export default {
     }
   },
   async fetch() {
-    await Api.getHome(this.$nuxt.context.params.id).then((res) => {
-      this.home = res.data
-      this.center = this.home._geoloc
-      this.markerLatLng = this.home._geoloc
-    })
+    try {
+      await Api.getHome(this.$nuxt.context.params.id)
+        .then((res) => {
+          this.home = res.data
+          this.center = this.home._geoloc
+          this.markerLatLng = this.home._geoloc
+        })
+        .catch((e) => {
+          throw e
+        })
+    } catch (e) {
+      const err = {
+        statusCode: e.response?.status || 500,
+        message: e.response?.statusText || 'Internal Server Error',
+        status: e.response?.status || 500,
+      }
+      throw err
+    }
   },
   head() {
     return {
