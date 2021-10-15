@@ -50,7 +50,8 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -69,6 +70,12 @@ export default {
         }
       }
     }
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL,
+    appId: process.env.ALGOLIA_APP_ID,
+    apiKey: process.env.API_KEY
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
