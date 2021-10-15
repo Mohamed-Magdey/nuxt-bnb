@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid>
+  <p v-if="$fetchState.pending">Fetching mountains...</p>
+  <p v-else-if="$fetchState.error">An error occurred :(</p>
+  <v-container v-else fluid>
     <v-row>
       <v-col class="d-flex">
         <v-img
@@ -48,7 +50,7 @@
 </template>
 
 <script>
-import homes from '@/data/homes'
+import Api from '@/services/Api'
 
 export default {
   data() {
@@ -63,18 +65,17 @@ export default {
       },
     }
   },
+  async fetch() {
+    await Api.getHome(this.$nuxt.context.params.id).then((res) => {
+      this.home = res.data
+      this.center = this.home._geoloc
+      this.markerLatLng = this.home._geoloc
+    })
+  },
   head() {
     return {
       title: this.home.title,
     }
-  },
-  mounted() {
-    this.center = this.home._geoloc
-    this.markerLatLng = this.home._geoloc
-  },
-  created() {
-    const home = homes.find((home) => home.objectID === this.$route.params.id)
-    this.home = home
   },
 }
 </script>
