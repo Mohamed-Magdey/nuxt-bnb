@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  name: 'ReadMore',
   props: {
     text: {
       type: String,
