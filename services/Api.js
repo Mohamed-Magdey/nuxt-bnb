@@ -16,11 +16,16 @@ export default {
   getHome(homeId) {
     return apiCall.get(`/homes/${homeId}`)
   },
-
   getReviewsByHomeId(homeId) {
     return apiCall.post(`/reviews/query`, {
       filters: `homeId:${homeId}`,
       hitsPerPage: 6,
+      attributesToHighlight: []
+    })
+  },
+  getUserByHomeId(homeId) {
+    return apiCall.post(`/users/query`, {
+      filters: `homeId:${homeId}`,
       attributesToHighlight: []
     })
   }
