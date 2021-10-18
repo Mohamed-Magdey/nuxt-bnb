@@ -48,6 +48,17 @@
         </l-map>
       </client-only>
     </div>
+    <div v-for="review in reviews" :key="review.objectID">
+      <v-img
+        :src="review.reviewer.image"
+        :alt="review.reviewer.name"
+        max-width="100"
+        max-height="100"
+      ></v-img>
+      {{ review.reviewer.name }}<br />
+      {{ formatDate(review.date) }}<br />
+      <short-text :text="review.comment" :target="150" /><br />
+    </div>
   </v-container>
 </template>
 
@@ -65,19 +76,20 @@ export default {
       options: {
         zoomControl: false,
       },
+      reviews: [],
     }
   },
   async fetch() {
     try {
-      await Api.getHome(this.$nuxt.context.params.id)
-        .then((res) => {
-          this.home = res.data
-          this.center = this.home._geoloc
-          this.markerLatLng = this.home._geoloc
-        })
-        .catch((e) => {
-          throw e
-        })
+      const homeResponse = await Api.getHome(this.$nuxt.context.params.id)
+      this.home = homeResponse.data
+      this.center = this.home._geoloc
+      this.markerLatLng = this.home._geoloc
+
+      const reviewResponse = await Api.getReviewsByHomeId(
+        this.$nuxt.context.params.id
+      )
+      this.reviews = reviewResponse.data.hits
     } catch (e) {
       const err = {
         statusCode: e.response?.status || 500,
@@ -92,6 +104,15 @@ export default {
     return {
       title: this.home.title,
     }
+  },
+  methods: {
+    formatDate(dateStr) {
+      const date = new Date(dateStr)
+      return date.toLocaleString(undefined, {
+        month: 'long',
+        year: 'numeric',
+      })
+    },
   },
 }
 </script>
