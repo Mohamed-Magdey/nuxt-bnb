@@ -92,20 +92,17 @@ export default {
   },
   async fetch() {
     try {
-      const homeResponse = await Api.getHome(this.$nuxt.context.params.id)
-      this.home = homeResponse.data
+      const responses = await Promise.all([
+        Api.getHome(this.$nuxt.context.params.id),
+        Api.getReviewsByHomeId(this.$nuxt.context.params.id),
+        Api.getUserByHomeId(this.$nuxt.context.params.id),
+      ])
+
+      this.home = responses[0].data
       this.center = this.home._geoloc
       this.markerLatLng = this.home._geoloc
-
-      const reviewResponse = await Api.getReviewsByHomeId(
-        this.$nuxt.context.params.id
-      )
-      this.reviews = reviewResponse.data.hits
-
-      const userResponse = await Api.getUserByHomeId(
-        this.$nuxt.context.params.id
-      )
-      this.user = userResponse.data.hits[0]
+      this.reviews = responses[1].data.hits
+      this.user = responses[2].data.hits[0]
     } catch (e) {
       const err = {
         statusCode: e.response?.status || 500,
