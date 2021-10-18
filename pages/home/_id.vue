@@ -2,9 +2,7 @@
   <v-container v-if="$fetchState.pending" fluid>
     Fetching mountains...
   </v-container>
-  <v-container v-else-if="$fetchState.error" fluid>
-    <error :error="$fetchState.error" />
-  </v-container>
+  <error v-else-if="$fetchState.error" :error="$fetchState.error" />
   <v-container v-else fluid>
     <v-row>
       <v-col class="d-flex">
@@ -86,6 +84,7 @@ export default {
         message: e.response?.statusText || 'Internal Server Error',
         status: e.response?.status || 500,
       }
+      this.$nuxt.context.error(err)
       throw err
     }
   },
