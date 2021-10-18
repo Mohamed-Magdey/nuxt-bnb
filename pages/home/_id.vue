@@ -59,6 +59,16 @@
       {{ formatDate(review.date) }}<br />
       <short-text :text="review.comment" :target="150" /><br />
     </div>
+    <v-img
+      :src="user.image"
+      :alt="user.name"
+      max-width="100"
+      max-height="100"
+    ></v-img>
+    {{ user.name }}<br />
+    {{ formatDate(user.joined) }}<br />
+    {{ user.reviewCount }}<br />
+    {{ user.description }}
   </v-container>
 </template>
 
@@ -77,6 +87,7 @@ export default {
         zoomControl: false,
       },
       reviews: [],
+      user: {},
     }
   },
   async fetch() {
@@ -90,6 +101,11 @@ export default {
         this.$nuxt.context.params.id
       )
       this.reviews = reviewResponse.data.hits
+
+      const userResponse = await Api.getUserByHomeId(
+        this.$nuxt.context.params.id
+      )
+      this.user = userResponse.data.hits[0]
     } catch (e) {
       const err = {
         statusCode: e.response?.status || 500,
