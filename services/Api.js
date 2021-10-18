@@ -15,5 +15,13 @@ const apiCall = axios.create({
 export default {
   getHome(homeId) {
     return apiCall.get(`/homes/${homeId}`)
+  },
+
+  getReviewsByHomeId(homeId) {
+    return apiCall.post(`/reviews/query`, {
+      filters: `homeId:${homeId}`,
+      hitsPerPage: 6,
+      attributesToHighlight: []
+    })
   }
 }
