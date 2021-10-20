@@ -1,26 +1,28 @@
 <template>
-  <v-row class="masonry-container">
-    <v-col
-      cols="12"
-      md="5"
-      class="item-1"
-      :style="`background-image: url(${images[0]})`"
-    >
-    </v-col>
-    <v-col cols="12" md="6" style="padding: 0">
-      <v-row no-gutters style="height: 458px">
-        <v-col
-          v-for="(image, inedx) in images.slice(1)"
-          :key="inedx"
-          :style="`background-image: url(${image})`"
-          class="items"
-          cols="12"
-          md="5"
-        >
-        </v-col>
-      </v-row>
-    </v-col>
-  </v-row>
+  <v-container tag="section">
+    <v-row style="height: 470px">
+      <v-col
+        cols="12"
+        md="5"
+        class="item-1"
+        :style="`background-image: url(${images[0]})`"
+      >
+      </v-col>
+      <v-col cols="12" md="6" style="padding: 0">
+        <v-row no-gutters style="height: 458px">
+          <v-col
+            v-for="(image, inedx) in images.slice(1)"
+            :key="inedx"
+            :style="`background-image: url(${image})`"
+            class="items"
+            cols="12"
+            md="5"
+          >
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -35,16 +37,6 @@ export default {
 </script>
 
 <style scoped>
-.masonry-container {
-  width: 70%;
-  height: 470px;
-  margin: 24px auto;
-}
-@media screen and (max-width: 1264px) {
-  .masonry-container {
-    width: 100%;
-  }
-}
 .item-1,
 .items {
   height: 50%;
