@@ -4,28 +4,8 @@
   </v-container>
   <error v-else-if="$fetchState.error" :error="$fetchState.error" />
   <v-container v-else fluid>
-    <v-row>
-      <v-col class="d-flex">
-        <v-img
-          v-for="image in home.images"
-          :key="image"
-          lazy-src="https://picsum.photos/id/11/100/60"
-          max-width="250"
-          max-height="200"
-          :src="image"
-          :alt="home.title"
-        >
-          <template #placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-              <v-progress-circular
-                indeterminate
-                color="grey lighten-5"
-              ></v-progress-circular>
-            </v-row>
-          </template>
-        </v-img>
-      </v-col>
-    </v-row>
+    <property-gallery :images="home.images" />
+
     <div>
       {{ home.title }}<br />
       ${{ home.pricePerNight }} / night<br />
@@ -129,5 +109,3 @@ export default {
   },
 }
 </script>
-
-<style></style>
