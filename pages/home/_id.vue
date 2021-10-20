@@ -3,21 +3,10 @@
     Fetching mountains...
   </v-container>
   <error v-else-if="$fetchState.error" :error="$fetchState.error" />
-  <v-container v-else fluid>
+  <v-container v-else>
     <property-gallery :images="home.images" />
-
+    <property-details :home="home" />
     <div>
-      {{ home.title }}<br />
-      ${{ home.pricePerNight }} / night<br />
-      <img src="/images/marker.svg" width="20" height="20" />{{
-        home.location.address
-      }}
-      {{ home.location.city }} {{ home.location.state }}
-      {{ home.location.country }}<br />
-      <img src="/images/star.svg" width="20" height="20" />{{ home.reviewValue
-      }}<br />
-      {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds,
-      {{ home.bathrooms }} bath<br />
       {{ home.description }}
     </div>
     <div ref="myMap" style="height: 800px; width: 800px">
