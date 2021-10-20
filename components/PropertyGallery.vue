@@ -2,21 +2,22 @@
   <v-container tag="section">
     <v-row style="height: 470px">
       <v-col
-        cols="12"
         md="5"
+        cols="4"
         class="item-1"
         :style="`background-image: url(${images[0]})`"
       >
       </v-col>
-      <v-col cols="12" md="6" style="padding: 0">
+      <v-col md="6" cols="7" style="padding: 0">
         <v-row no-gutters style="height: 458px">
           <v-col
             v-for="(image, inedx) in images.slice(1)"
             :key="inedx"
             :style="`background-image: url(${image})`"
             class="items"
-            cols="12"
             md="5"
+            sm="4"
+            cols="5"
           >
           </v-col>
         </v-row>
