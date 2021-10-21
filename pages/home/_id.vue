@@ -8,18 +8,8 @@
     <PropertyDetails :home="home" />
     <PropertyDescription :home="home" />
     <PropertyMap :home="home" />
+    <PropertyReviews :reviews="reviews" />
 
-    <div v-for="review in reviews" :key="review.objectID">
-      <v-img
-        :src="review.reviewer.image"
-        :alt="review.reviewer.name"
-        max-width="100"
-        max-height="100"
-      ></v-img>
-      {{ review.reviewer.name }}<br />
-      {{ formatDate(review.date) }}<br />
-      <short-text :text="review.comment" :target="150" /><br />
-    </div>
     <v-img
       :src="user.image"
       :alt="user.name"
@@ -35,6 +25,7 @@
 
 <script>
 import Api from '@/services/Api'
+import formatDate from '~/utils/formatDate'
 
 export default {
   name: 'Property',
@@ -72,13 +63,7 @@ export default {
     }
   },
   methods: {
-    formatDate(dateStr) {
-      const date = new Date(dateStr)
-      return date.toLocaleString(undefined, {
-        month: 'long',
-        year: 'numeric',
-      })
-    },
+    formatDate,
   },
 }
 </script>
