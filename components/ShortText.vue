@@ -1,5 +1,6 @@
 <template>
   <span>
+    <v-icon size="30" color="primary">mdi-format-quote-open</v-icon>
     {{ displayText }}
     <button
       v-if="isTooLong && !isExpanded"
