@@ -7,15 +7,8 @@
     <PropertyGallery :images="home.images" />
     <PropertyDetails :home="home" />
     <PropertyDescription :home="home" />
+    <PropertyMap :home="home" />
 
-    <div ref="myMap" style="height: 800px; width: 800px">
-      <client-only>
-        <l-map :zoom="zoom" :center="center" :options="options">
-          <l-tile-layer :url="url"></l-tile-layer>
-          <l-marker :lat-lng="markerLatLng"></l-marker>
-        </l-map>
-      </client-only>
-    </div>
     <div v-for="review in reviews" :key="review.objectID">
       <v-img
         :src="review.reviewer.image"
@@ -48,13 +41,6 @@ export default {
   data() {
     return {
       home: {},
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      zoom: 18,
-      center: {},
-      markerLatLng: {},
-      options: {
-        zoomControl: false,
-      },
       reviews: [],
       user: {},
     }
@@ -68,8 +54,6 @@ export default {
       ])
 
       this.home = responses[0].data
-      this.center = this.home._geoloc
-      this.markerLatLng = this.home._geoloc
       this.reviews = responses[1].data.hits
       this.user = responses[2].data.hits[0]
     } catch (e) {
