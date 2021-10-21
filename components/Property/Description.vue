@@ -54,14 +54,6 @@ export default {
 </script>
 
 <style scoped>
-.py-20 {
-  padding-top: 80px !important;
-  padding-bottom: 80px !important;
-}
-h2 {
-  margin-bottom: 2rem;
-  font-weight: 500 !important;
-}
 h2 + p {
   font-size: 1.125rem;
 }
