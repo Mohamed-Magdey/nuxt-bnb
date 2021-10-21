@@ -12,7 +12,7 @@
         >
           Description
         </h2>
-        <p :style="`color: ${paragarphColor}`">{{ home.description }}</p>
+        <paragraph :text="home.description" />
       </v-col>
       <v-col cols="6" class="py-20 pl-10" style="padding-right: 105px">
         <v-chip
@@ -46,15 +46,6 @@ export default {
     chipColor() {
       return this.$vuetify.theme.isDark ? '' : '#E3ECFF'
     },
-    paragarphColor() {
-      return this.$vuetify.theme.isDark ? 'rgba(255,255,255,0.9)' : '#494e61'
-    },
   },
 }
 </script>
-
-<style scoped>
-h2 + p {
-  font-size: 1.125rem;
-}
-</style>
