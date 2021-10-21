@@ -5,6 +5,7 @@
       v-if="isTooLong && !isExpanded"
       type="button"
       class="link"
+      :style="`color: ${linkColor}`"
       @click="isExpanded = true"
     >
       read more
@@ -13,6 +14,7 @@
       v-if="isTooLong && isExpanded"
       type="button"
       class="link"
+      :style="`color: ${linkColor}`"
       @click="isExpanded = false"
     >
       read less
@@ -49,6 +51,9 @@ export default {
       }
       return this.chunks[0] + '...'
     },
+    linkColor() {
+      return this.$vuetify.theme.isDark ? '#0091EA' : '#4b4bff'
+    },
   },
   created() {
     this.chunks = this.getChunks()
@@ -67,7 +72,6 @@ export default {
 
 <style scoped>
 .link {
-  color: #4b4bff;
   text-decoration: underline;
 }
 .link:focus {
