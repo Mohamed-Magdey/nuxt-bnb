@@ -6,10 +6,8 @@
   <v-container v-else>
     <PropertyGallery :images="home.images" />
     <PropertyDetails :home="home" />
+    <PropertyDescription :home="home" />
 
-    <div>
-      {{ home.description }}
-    </div>
     <div ref="myMap" style="height: 800px; width: 800px">
       <client-only>
         <l-map :zoom="zoom" :center="center" :options="options">
@@ -46,6 +44,7 @@
 import Api from '@/services/Api'
 
 export default {
+  name: 'Property',
   data() {
     return {
       home: {},
