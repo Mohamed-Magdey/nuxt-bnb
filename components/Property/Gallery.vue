@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  name: 'PropertyGallary',
   props: {
     images: {
       type: Array,
