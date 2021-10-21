@@ -6,7 +6,7 @@
         class="pr-10"
         style="border-right: 1px dashed rgba(151, 151, 151)"
       >
-        <h1 class="text-color mb-5">{{ home.title }}</h1>
+        <h1 class="text-color--text mb-5">{{ home.title }}</h1>
         <div class="details d-flex justify-space-between align-center">
           <div class="address">
             <v-icon color="blue">mdi-map-marker-outline</v-icon>
@@ -20,7 +20,7 @@
             {{ home.reviewValue }} <span>({{ home.reviewCount }})</span>
           </div>
         </div>
-        <div class="details-footer text-color mt-12 py-10">
+        <div class="details-footer text-color--text mt-12 py-10">
           {{ pluralize(home.guests, 'guest') }} &middot;
           {{ pluralize(home.bedrooms, 'room') }} &middot;
           {{ pluralize(home.beds, 'bed') }} &middot;
