@@ -1,24 +1,29 @@
 <template>
   <v-container tag="section">
-    <v-row style="height: 470px">
-      <v-col
-        md="5"
-        cols="4"
-        class="item-1"
-        :style="`background-image: url(${images[0]})`"
-      >
+    <v-row no-gutters style="height: 37.375rem">
+      <v-col cols="6" style="height: 100%" class="px-2 pt-2 pb-5">
+        <div
+          class="item-1 rounded-l-xl"
+          :style="`background-image: url(${images[0]})`"
+        ></div>
       </v-col>
-      <v-col md="6" cols="7" style="padding: 0">
-        <v-row no-gutters style="height: 458px">
+      <v-col cols="6">
+        <v-row no-gutters style="height: 36.625rem">
           <v-col
-            v-for="(image, inedx) in images.slice(1)"
-            :key="inedx"
-            :style="`background-image: url(${image})`"
-            class="items"
-            md="5"
-            sm="4"
-            cols="5"
+            v-for="(image, index) in images.slice(1)"
+            :key="index"
+            cols="6"
+            style="height: 50%"
+            class="pa-2"
           >
+            <div
+              :style="`background-image: url(${image})`"
+              class="items"
+              :class="[
+                index === 1 && 'rounded-tr-xl',
+                index === 3 && 'rounded-br-xl',
+              ]"
+            ></div>
           </v-col>
         </v-row>
       </v-col>
@@ -41,21 +46,8 @@ export default {
 <style scoped>
 .item-1,
 .items {
-  height: 50%;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0;
-  margin: 0 12px 12px 0;
-}
-.item-1 {
-  height: 100%;
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
-}
-.items:nth-child(2) {
-  border-top-right-radius: 18px;
-}
-.items:nth-child(4) {
-  border-bottom-right-radius: 18px;
 }
 </style>
