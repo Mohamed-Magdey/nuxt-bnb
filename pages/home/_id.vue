@@ -4,8 +4,9 @@
   </v-container>
   <error v-else-if="$fetchState.error" :error="$fetchState.error" />
   <v-container v-else>
-    <property-gallery :images="home.images" />
-    <property-details :home="home" />
+    <PropertyGallery :images="home.images" />
+    <PropertyDetails :home="home" />
+
     <div>
       {{ home.description }}
     </div>
