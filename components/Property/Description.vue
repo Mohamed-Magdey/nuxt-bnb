@@ -12,7 +12,7 @@
         >
           Description
         </h2>
-        <paragraph :text="home.description" />
+        <BaseParagraph :text="home.description" />
       </v-col>
       <v-col cols="6" class="py-20 pl-10" style="padding-right: 105px">
         <v-chip

@@ -30,9 +30,9 @@
       <v-col cols="5" class="pl-10">
         <div class="price">${{ home.pricePerNight }}<span> / night</span></div>
         <div class="search d-flex justify-space-between">
-          <date-picker :menu="menu1" :check="checkIn" label="Check in" />
+          <BaseDatePicker :menu="menu1" :check="checkIn" label="Check in" />
           <v-spacer></v-spacer>
-          <date-picker :menu="menu2" :check="checkOut" label="Check out" />
+          <BaseDatePicker :menu="menu2" :check="checkOut" label="Check out" />
         </div>
         <v-btn color="primary" block x-large>Request to book!</v-btn>
       </v-col>

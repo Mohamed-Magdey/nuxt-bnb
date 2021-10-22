@@ -8,7 +8,7 @@
         >
           Location
         </h2>
-        <paragraph
+        <BaseParagraph
           :text="`${home.location.address} ${home.location.city} ${home.location.state} ${home.location.country}`"
         />
         <client-only>

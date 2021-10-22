@@ -17,7 +17,7 @@
             </div>
           </v-card-title>
           <v-card-text>
-            <short-text :text="review.comment" :target="100" />
+            <BaseShortText :text="review.comment" :target="100" />
           </v-card-text>
         </v-card>
       </v-col>
