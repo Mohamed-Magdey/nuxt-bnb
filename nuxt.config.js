@@ -29,7 +29,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/base.js'
+    '@/plugins/base.js',
+    '@plugins/auth.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -80,7 +81,11 @@ export default {
   env: {
     baseUrl: process.env.BASE_URL,
     appId: process.env.ALGOLIA_APP_ID,
-    apiKey: process.env.API_KEY
+    apiKey: process.env.API_KEY,
+    auth: {
+      cookieName: 'idToken',
+      clientId: process.env.GOOGLE_CLIENT_ID
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
