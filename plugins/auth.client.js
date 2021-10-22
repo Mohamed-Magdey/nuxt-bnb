@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie'
 
-export default ({ app }, inject) => {
+export default ({ store }, inject) => {
   window.initAuth = init
   addScript()
 
@@ -30,13 +30,17 @@ export default ({ app }, inject) => {
 
   function parseUser(user) {
     const profile = user.getBasicProfile()
-    console.log('Name: ' + profile.getName())
-    console.log('Image Url: ' + profile.getImageUrl())
 
     if (!user.isSignedIn()) {
       Cookie.remove(process.env.auth.cookieName)
+      store.commit('auth/USER', null)
       return
     }
+    store.commit('auth/USER', {
+      fullName: profile.getName(),
+      profileUrl: profile.getImageUrl()
+    })
+
     const idToken = user.getAuthResponse().id_token
     Cookie.set(process.env.auth.cookieName, idToken, { expires: 1 / 24, sameSite: 'Lax' })
   }
