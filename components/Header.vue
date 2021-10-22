@@ -9,9 +9,10 @@
     <div class="d-flex align-center mx-2">
       <v-img src="/images/icons/house.svg"></v-img>
       <div class="name">Host</div>
-      <v-avatar>
+      <!-- <v-avatar>
         <img src="/images/user.jpg" alt="user" />
-      </v-avatar>
+      </v-avatar> -->
+      <div id="googleButton"></div>
     </div>
   </v-app-bar>
 </template>
