@@ -9,23 +9,12 @@
     <PropertyDescription :home="home" />
     <PropertyMap :home="home" />
     <PropertyReviews :reviews="reviews" />
-
-    <v-img
-      :src="user.image"
-      :alt="user.name"
-      max-width="100"
-      max-height="100"
-    ></v-img>
-    {{ user.name }}<br />
-    {{ formatDate(user.joined) }}<br />
-    {{ user.reviewCount }}<br />
-    {{ user.description }}
+    <PropertyHost :user="user" />
   </v-container>
 </template>
 
 <script>
 import Api from '@/services/Api'
-import formatDate from '~/utils/formatDate'
 
 export default {
   name: 'Property',
@@ -61,9 +50,6 @@ export default {
     return {
       title: this.home.title,
     }
-  },
-  methods: {
-    formatDate,
   },
 }
 </script>
