@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .v-application p {
   margin: 0;
   font-weight: 500;
