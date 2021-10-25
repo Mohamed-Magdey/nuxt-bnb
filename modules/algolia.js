@@ -21,7 +21,7 @@ export default function () {
     const identity = req.identity
     const userData = await getUserById(identity)
 
-    if (userData.status === 200) {
+    if (userData?.status === 200) {
       sendJSON(userData.data, res)
       return
     }
@@ -34,8 +34,12 @@ export default function () {
     return apiCall.put(`/users/${identity.id}`, makeUserPayload(identity))
   }
 
-  function getUserById(identity) {
-    return apiCall.get(`/users/${identity.id}`)
+  async function getUserById(identity) {
+    try {
+      return await apiCall.get(`/users/${identity.id}`)
+    } catch (err) {
+      return err
+    }
   }
 
   function sendJSON(data, res) {
