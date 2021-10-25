@@ -49,7 +49,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'nuxt-leaflet',
-    '@/modules/auth'
+    '@/modules/auth',
+    '@/modules/algolia'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -86,6 +87,13 @@ export default {
     auth: {
       cookieName: 'idToken',
       clientId: process.env.GOOGLE_CLIENT_ID
+    }
+  },
+
+  privateRuntimeConfig: {
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID,
+      key: process.env.PRIVATE_API_KEY
     }
   },
 
