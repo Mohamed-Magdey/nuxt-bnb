@@ -28,21 +28,27 @@ export default ({ store }, inject) => {
     })
   }
 
-  function parseUser(user) {
-    const profile = user.getBasicProfile()
-
+  async function parseUser(user) {
     if (!user.isSignedIn()) {
       Cookie.remove(process.env.auth.cookieName)
       store.commit('auth/USER', null)
       return
     }
-    store.commit('auth/USER', {
-      fullName: profile.getName(),
-      profileUrl: profile.getImageUrl()
-    })
 
     const idToken = user.getAuthResponse().id_token
     Cookie.set(process.env.auth.cookieName, idToken, { expires: 1 / 24, sameSite: 'Lax' })
+
+    try {
+      const response = await fetch('/api/user')
+      const userData = await response.json()
+
+      store.commit('auth/USER', {
+        fullName: userData.name,
+        profileUrl: userData.image
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   function signOut() {
