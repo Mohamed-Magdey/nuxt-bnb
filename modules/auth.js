@@ -21,7 +21,7 @@ export default function () {
     }
     console.log(ticket)
     req.identity = {
-      id: ticket.id,
+      id: ticket.sub,
       email: ticket.email,
       name: ticket.name,
       image: ticket.picture
