@@ -18,13 +18,28 @@ export default function () {
   })
 
   function getUserRoute(req, res, next) {
-    console.log(req.identity)
+    const identity = req.identity
+    const userData = getUserById(identity)
+
+    if (userData.status === 200) {
+      sendJSON(userData.data, res)
+      return
+    }
+
     createUser(req.identity)
-    next()
+    sendJSON(makeUserPayload(identity), res)
   }
 
   function createUser(identity) {
+    return apiCall.get(`/users/${identity.id}`)
+  }
+
+  function getUserById(identity) {
     return apiCall.put(`/users/${identity.id}`, makeUserPayload(identity))
+  }
+
+  function sendJSON(data, res) {
+    res.end(data)
   }
 
   function makeUserPayload(identity) {
