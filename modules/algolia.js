@@ -17,9 +17,9 @@ export default function () {
     app.use('/api/user', getUserRoute)
   })
 
-  function getUserRoute(req, res, next) {
+  async function getUserRoute(req, res, next) {
     const identity = req.identity
-    const userData = getUserById(identity)
+    const userData = await getUserById(identity)
 
     if (userData.status === 200) {
       sendJSON(userData.data, res)
@@ -31,15 +31,16 @@ export default function () {
   }
 
   function createUser(identity) {
-    return apiCall.get(`/users/${identity.id}`)
-  }
-
-  function getUserById(identity) {
     return apiCall.put(`/users/${identity.id}`, makeUserPayload(identity))
   }
 
+  function getUserById(identity) {
+    return apiCall.get(`/users/${identity.id}`)
+  }
+
   function sendJSON(data, res) {
-    res.end(data)
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify(data))
   }
 
   function makeUserPayload(identity) {
