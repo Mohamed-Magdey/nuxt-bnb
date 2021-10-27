@@ -1,11 +1,11 @@
-import { getAxiosInstance } from './helpers'
+import getApis from './apis'
 import userRouter from './routers/user'
 
 export default function () {
   const algoliaConfig = this.options.privateRuntimeConfig.algolia
-  const apiCall = getAxiosInstance(this, algoliaConfig)
+  const apis = getApis(this, algoliaConfig)
 
   this.nuxt.hook('render:setupMiddleware', (app) => {
-    app.use('/api/user', userRouter(apiCall))
+    app.use('/api/user', userRouter(apis))
   })
 }

@@ -1,30 +1,19 @@
 import { sendJSON } from '../helpers'
 
-export default (apiCall) => {
+export default (apis) => {
   return async function getUserRoute(req, res, next) {
     const identity = req.identity
-    const userData = await getUserById(identity)
+    const userData = await apis.user.getById(identity)
 
     if (userData?.status === 200) {
       sendJSON(userData.data, res)
       return
     }
-
-    createUser(req.identity)
-    sendJSON(makeUserPayload(identity), res)
+    const payload = makeUserPayload(identity)
+    apis.user.create(req.identity, payload)
+    sendJSON(payload, res)
   }
 
-  function createUser(identity) {
-    return apiCall.put(`/users/${identity.id}`, makeUserPayload(identity))
-  }
-
-  async function getUserById(identity) {
-    try {
-      return await apiCall.get(`/users/${identity.id}`)
-    } catch (err) {
-      return err
-    }
-  }
 
   function makeUserPayload(identity) {
     return {
