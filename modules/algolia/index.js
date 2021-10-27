@@ -1,17 +1,8 @@
-import axios from 'axios'
+import { getAxiosInstance, sendJSON } from './helpers'
 
 export default function () {
   const algoliaConfig = this.options.privateRuntimeConfig.algolia
-  const apiCall = axios.create({
-    baseURL: this.options.env.baseUrl,
-    headers: {
-      'X-Algolia-API-Key': algoliaConfig.key,
-      'X-Algolia-Application-Id': algoliaConfig.appId,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    timeout: 10000
-  })
+  const apiCall = getAxiosInstance(this, algoliaConfig)
 
   this.nuxt.hook('render:setupMiddleware', (app) => {
     app.use('/api/user', getUserRoute)
@@ -40,11 +31,6 @@ export default function () {
     } catch (err) {
       return err
     }
-  }
-
-  function sendJSON(data, res) {
-    res.setHeader('Content-Type', 'application/json')
-    res.end(JSON.stringify(data))
   }
 
   function makeUserPayload(identity) {
