@@ -6,6 +6,6 @@ export default (app, algoliaConfig) => {
   const apiCall = getAxiosInstance(app, algoliaConfig)
 
   return {
-    user: userApi(apiCall, algoliaConfig)
+    user: userApi(apiCall)
   }
 }
