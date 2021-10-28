@@ -1,4 +1,3 @@
-import user from '../routers/user'
 import { getAxiosInstance } from '../helpers'
 import userApi from './user'
 
