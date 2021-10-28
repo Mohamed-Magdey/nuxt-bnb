@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    Admin
+    <h1>Admin</h1>
+    <nuxt-link to="/admin/homes/">Homes</nuxt-link>
     <NuxtChild />
   </v-container>
 </template>
