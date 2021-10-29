@@ -1,7 +1,11 @@
 export default (apiCall) => {
   return {
-    create: (homeId, payload) => {
-      return apiCall.put(`/homes/${homeId}`, payload)
+    create: async (homeId, payload) => {
+      try {
+        return await apiCall.put(`/homes/${homeId}`, payload)
+      } catch (err) {
+        return err
+      }
     }
   }
 }
