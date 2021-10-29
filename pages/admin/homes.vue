@@ -17,9 +17,10 @@
       <v-text-field
         v-for="(feature, index) in home.features"
         :key="index + 10"
-        type="text"
         :v-model="feature"
-        value="feature"
+        :value="feature"
+        type="text"
+        label="Feature"
       />
       <v-text-field
         v-model="home.pricePerNight"
@@ -65,7 +66,7 @@ export default {
         bedrooms: '',
         beds: '',
         bathrooms: '',
-        features: ['', '', '', '', ''],
+        features: ['t', 't', 't', 't', 't'],
         location: {
           address: '',
           city: '',
@@ -75,7 +76,7 @@ export default {
         },
         _geoloc: {
           lat: 26.1,
-          long: 26.1,
+          lng: 26.1,
         },
         images: [
           'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
