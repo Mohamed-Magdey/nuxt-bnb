@@ -87,7 +87,10 @@ export default {
     auth: {
       cookieName: 'idToken',
       clientId: process.env.GOOGLE_CLIENT_ID
-    }
+    },
+    hereAppId: process.env.DEVELOPER_HERE_APP_ID,
+    hereApiKey: process.env.DEVELOPER_HERE_API_KEY,
+    hereUrl: process.env.HERE_URL
   },
 
   privateRuntimeConfig: {

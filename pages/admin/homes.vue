@@ -30,6 +30,12 @@
       <v-text-field v-model="home.beds" type="number" label="Beds" />
       <v-text-field v-model="home.bathrooms" type="number" label="Bathrooms" />
       <v-text-field
+        v-model="query"
+        type="text"
+        label="Select a location"
+        aria-autocomplete="off"
+      />
+      <v-text-field
         v-model="home.location.address"
         type="text"
         label="Address"
@@ -55,6 +61,7 @@
 export default {
   data() {
     return {
+      query: '',
       home: {
         title: '',
         description: '',
@@ -73,8 +80,8 @@ export default {
           country: '',
         },
         _geoloc: {
-          lat: 26.1,
-          lng: 26.1,
+          lat: '',
+          lng: '',
         },
         images: [
           'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
@@ -85,6 +92,48 @@ export default {
         ],
       },
     }
+  },
+  watch: {
+    query(value) {
+      fetch(
+        `${process.env.hereUrl}?apiKey=${process.env.hereApiKey}&limit=1&q=${value}`
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          let street = ''
+          if (result.items?.length > 0) {
+            if (
+              result.items[0].address.houseNumber &&
+              result.items[0].address.street
+            ) {
+              street =
+                result.items[0].address.houseNumber +
+                ' ' +
+                result.items[0].address.street
+            } else {
+              street = ''
+            }
+            this.home.location.address = street + ' '
+            this.home.location.city = result.items[0].address?.city || ''
+            this.home.location.state =
+              result.items[0].address?.state ||
+              result.items[0].address?.district ||
+              ''
+            this.home.location.postalCode =
+              result.items[0].address?.postalCode || ''
+            this.home.location.country =
+              result.items[0].address?.countryName || ''
+            this.home._geoloc.lat = result.items[0].position.lat
+            this.home._geoloc.lng = result.items[0].position.lng
+          } else {
+            this.home.location.address = ''
+            this.home.location.city = ''
+            this.home.location.state = ''
+            this.home.location.postalCode = ''
+            this.home.location.country = ''
+          }
+        })
+    },
   },
   methods: {
     async onSubmit() {
