@@ -3,6 +3,7 @@
     [LIST OF HOMES HERE]
     <h2>Add a Home</h2>
     <v-form @submit.prevent="onSubmit">
+      <ImageUploader />
       <v-text-field
         v-for="(image, index) in home.images"
         :key="index"
