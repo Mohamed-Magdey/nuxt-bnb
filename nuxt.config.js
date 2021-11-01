@@ -50,7 +50,8 @@ export default {
     '@nuxtjs/axios',
     'nuxt-leaflet',
     '@/modules/auth',
-    '@/modules/algolia'
+    '@/modules/algolia',
+    '@/modules/cloudinary'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
