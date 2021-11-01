@@ -51,8 +51,13 @@ export default {
     'nuxt-leaflet',
     '@/modules/auth',
     '@/modules/algolia',
-    '@/modules/cloudinary'
+    '@/modules/cloudinary',
+    '@nuxtjs/cloudinary'
   ],
+
+  cloudinary: {
+    cloudName: process.env.CLOUDINARY_NAME
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -91,7 +96,10 @@ export default {
     },
     hereAppId: process.env.DEVELOPER_HERE_APP_ID,
     hereApiKey: process.env.DEVELOPER_HERE_API_KEY,
-    hereUrl: process.env.HERE_URL
+    hereUrl: process.env.HERE_URL,
+    cloudinary: {
+      apiKey: process.env.CLOUDINARY_API_KEY
+    }
   },
 
   privateRuntimeConfig: {
