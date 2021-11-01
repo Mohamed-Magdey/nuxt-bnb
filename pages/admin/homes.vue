@@ -29,12 +29,19 @@
       <v-text-field v-model="home.bedrooms" type="number" label="bedrooms" />
       <v-text-field v-model="home.beds" type="number" label="Beds" />
       <v-text-field v-model="home.bathrooms" type="number" label="Bathrooms" />
-      <v-text-field
-        v-model="query"
-        type="text"
-        label="Select a location"
-        aria-autocomplete="off"
-      />
+      <v-autocomplete
+        :items="entries"
+        :loading="isLoading"
+        :search-input.sync="search"
+        item-text="Description"
+        item-value="API"
+        label="Location"
+        placeholder="Select a location"
+        hide-no-data
+        hide-selected
+        return-object
+        @change="changed"
+      ></v-autocomplete>
       <v-text-field
         v-model="home.location.address"
         type="text"
@@ -61,7 +68,9 @@
 export default {
   data() {
     return {
-      query: '',
+      isLoading: false,
+      entries: [],
+      search: null,
       home: {
         title: '',
         description: '',
@@ -94,48 +103,43 @@ export default {
     }
   },
   watch: {
-    query(value) {
+    search(value) {
+      if (this.isLoading) return
+
+      this.isLoading = true
       fetch(
-        `${process.env.hereUrl}?apiKey=${process.env.hereApiKey}&limit=1&q=${value}`
+        `${process.env.hereUrl}?apiKey=${process.env.hereApiKey}&q=${value}`
       )
         .then((result) => result.json())
         .then((result) => {
-          let street = ''
-          if (result.items?.length > 0) {
-            if (
-              result.items[0].address.houseNumber &&
-              result.items[0].address.street
-            ) {
-              street =
-                result.items[0].address.houseNumber +
-                ' ' +
-                result.items[0].address.street
-            } else {
-              street = ''
-            }
-            this.home.location.address = street + ' '
-            this.home.location.city = result.items[0].address?.city || ''
-            this.home.location.state =
-              result.items[0].address?.state ||
-              result.items[0].address?.district ||
-              ''
-            this.home.location.postalCode =
-              result.items[0].address?.postalCode || ''
-            this.home.location.country =
-              result.items[0].address?.countryName || ''
-            this.home._geoloc.lat = result.items[0].position.lat
-            this.home._geoloc.lng = result.items[0].position.lng
-          } else {
-            this.home.location.address = ''
-            this.home.location.city = ''
-            this.home.location.state = ''
-            this.home.location.postalCode = ''
-            this.home.location.country = ''
-          }
+          this.entries = result.items?.map((entry) => {
+            const Description = entry.title
+            return Object.assign({}, entry, { Description })
+          })
         })
+        .finally(() => (this.isLoading = false))
     },
   },
   methods: {
+    changed(result) {
+      if (Object.keys(result).length > 0) {
+        this.home.location.address =
+          result.address?.houseNumber + ' ' + result.address?.street
+        this.home.location.city = result.address?.city || ''
+        this.home.location.state =
+          result.address?.state || result.address?.district || ''
+        this.home.location.postalCode = result.address?.postalCode || ''
+        this.home.location.country = result.address?.countryName || ''
+        this.home._geoloc.lat = result.position.lat
+        this.home._geoloc.lng = result.position.lng
+      } else {
+        this.home.location.address = ''
+        this.home.location.city = ''
+        this.home.location.state = ''
+        this.home.location.postalCode = ''
+        this.home.location.country = ''
+      }
+    },
     async onSubmit() {
       await fetch('/api/homes', {
         method: 'POST',
