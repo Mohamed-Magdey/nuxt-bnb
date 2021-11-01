@@ -6,8 +6,7 @@
       <v-text-field
         v-for="(image, index) in home.images"
         :key="index"
-        :v-model="image"
-        :value="image"
+        v-model="home.images[index]"
         label="Images"
         type="text"
       />
@@ -17,8 +16,7 @@
       <v-text-field
         v-for="(feature, index) in home.features"
         :key="index + 10"
-        :v-model="feature"
-        :value="feature"
+        v-model="home.features[index]"
         type="text"
         label="Feature"
       />
