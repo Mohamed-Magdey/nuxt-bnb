@@ -97,6 +97,9 @@ export default {
     algolia: {
       appId: process.env.ALGOLIA_APP_ID,
       key: process.env.PRIVATE_API_KEY
+    },
+    cloudinary: {
+      apiSecret: process.env.CLOUDINARY_API_SECRET
     }
   },
 
