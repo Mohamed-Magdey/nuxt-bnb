@@ -1,6 +1,16 @@
 <template>
   <v-container>
-    [LIST OF HOMES HERE]
+    <span v-for="hom in homeList" :key="hom.objectID">
+      {{ hom.title }}:
+      <v-btn
+        color="secondary"
+        :style="`backgroundColor: ${deleteColor} !important`"
+        small
+        depressed
+      >
+        Delete
+      </v-btn>
+    </span>
     <h2>Add a Home</h2>
     <v-form @submit.prevent="onSubmit">
       <ImageUploader
@@ -66,6 +76,7 @@
 export default {
   data() {
     return {
+      homeList: [],
       isLoading: false,
       entries: [],
       search: null,
@@ -94,6 +105,11 @@ export default {
       },
     }
   },
+  computed: {
+    deleteColor() {
+      return this.$vuetify.theme.isDark ? '#504e4b' : ''
+    },
+  },
   watch: {
     search(value) {
       if (this.isLoading) return
@@ -112,7 +128,15 @@ export default {
         .finally(() => (this.isLoading = false))
     },
   },
+  mounted() {
+    this.setHomesList()
+  },
   methods: {
+    async setHomesList() {
+      let response = await fetch('/api/homes/user/')
+      response = await response.json()
+      this.homeList = response
+    },
     imageUpdated(imageUrl, index) {
       this.home.images[index - 1] = imageUrl
     },
