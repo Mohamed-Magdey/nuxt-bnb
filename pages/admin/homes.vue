@@ -1,16 +1,17 @@
 <template>
   <v-container>
-    <span v-for="hom in homeList" :key="hom.objectID">
+    <p v-for="hom in homeList" :key="hom.objectID">
       {{ hom.title }}:
       <v-btn
         color="secondary"
         :style="`backgroundColor: ${deleteColor} !important`"
         small
         depressed
+        @click="deleteHome(hom.objectID)"
       >
         Delete
       </v-btn>
-    </span>
+    </p>
     <h2>Add a Home</h2>
     <v-form @submit.prevent="onSubmit">
       <ImageUploader
@@ -132,6 +133,13 @@ export default {
     this.setHomesList()
   },
   methods: {
+    async deleteHome(homeId) {
+      await fetch(`/api/homes/${homeId}`, {
+        method: 'DELETE',
+      })
+      const index = this.homeList.findIndex((obj) => obj.objectID === homeId)
+      this.homeList.splice(index, 1)
+    },
     async setHomesList() {
       let response = await fetch('/api/homes/user/')
       response = await response.json()
@@ -160,12 +168,18 @@ export default {
       }
     },
     async onSubmit() {
-      await fetch('/api/homes', {
+      let response = await fetch('/api/homes', {
         method: 'POST',
         body: JSON.stringify(this.home),
         headers: {
           'Content-Type': 'application/json',
         },
+      })
+      response = await response.json()
+
+      this.homeList.push({
+        title: this.home.title,
+        objectID: response.homeId,
       })
     },
   },
