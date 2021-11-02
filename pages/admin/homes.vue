@@ -3,13 +3,10 @@
     [LIST OF HOMES HERE]
     <h2>Add a Home</h2>
     <v-form @submit.prevent="onSubmit">
-      <ImageUploader />
-      <v-text-field
-        v-for="(image, index) in home.images"
+      <ImageUploader
+        v-for="index in 5"
         :key="index"
-        v-model="home.images[index]"
-        label="Images"
-        type="text"
+        @file-uploaded="imageUpdated($event, index)"
       />
       <v-text-field v-model="home.title" label="Title" type="text" />
       <v-textarea v-model="home.description" label="Description" outlined />
@@ -81,7 +78,7 @@ export default {
         bedrooms: '',
         beds: '',
         bathrooms: '',
-        features: ['t', 't', 't', 't', 't'],
+        features: ['', '', '', '', ''],
         location: {
           address: '',
           city: '',
@@ -93,13 +90,7 @@ export default {
           lat: '',
           lng: '',
         },
-        images: [
-          'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-          'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=81',
-          'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=82',
-          'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=83',
-          'https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=84',
-        ],
+        images: [],
       },
     }
   },
@@ -122,6 +113,9 @@ export default {
     },
   },
   methods: {
+    imageUpdated(imageUrl, index) {
+      this.home.images[index - 1] = imageUrl
+    },
     changed(result) {
       if (Object.keys(result).length > 0) {
         this.home.location.address =
