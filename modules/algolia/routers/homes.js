@@ -3,6 +3,9 @@ import { rejectHitBadRequest, hasBadBody, sendJSON } from '../helpers'
 
 export default (apis) => {
   return (req, res) => {
+    if (req.method === 'GET' && req.url === '/user/') {
+      return getHomesByUser(req.identity.id, res)
+    }
     if (req.method === 'POST') {
       if (hasBadBody(req)) {
         return rejectHitBadRequest(res)
@@ -11,6 +14,11 @@ export default (apis) => {
       return
     }
     rejectHitBadRequest(res)
+  }
+
+  async function getHomesByUser(userId, res) {
+    const payload = (await apis.homes.getByUserId(userId)).data.hits
+    sendJSON(payload, res)
   }
 
   async function createHome(identity, body, res) {
