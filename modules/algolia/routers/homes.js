@@ -3,6 +3,10 @@ import { rejectHitBadRequest, hasBadBody, sendJSON } from '../helpers'
 
 export default (apis) => {
   return (req, res) => {
+    if (req.method === 'DELETE') {
+      const homeId = req.url.replace(/\//g, '')
+      return deleteHome(req.identity, homeId, res)
+    }
     if (req.method === 'GET' && req.url === '/user/') {
       return getHomesByUser(req.identity.id, res)
     }
@@ -14,6 +18,14 @@ export default (apis) => {
       return
     }
     rejectHitBadRequest(res)
+  }
+
+  async function deleteHome(identity, homeId, res) {
+    await Promise.all([
+      apis.homes.delete(homeId),
+      apis.user.removeHome(identity, homeId)
+    ])
+    sendJSON({}, res)
   }
 
   async function getHomesByUser(userId, res) {
@@ -37,6 +49,6 @@ export default (apis) => {
       return
     }
     await apis.user.assignHome(identity, homeId)
-    sendJSON({}, res)
+    sendJSON({ homeId }, res)
   }
 }

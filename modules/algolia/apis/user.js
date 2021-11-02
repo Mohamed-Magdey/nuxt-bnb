@@ -1,5 +1,11 @@
 export default (apiCall) => {
   return {
+    async removeHome(identity, homeId) {
+      const payload = (await this.getById(identity)).data
+      const homes = payload.homeId.filter(id => id !== homeId)
+      payload.homeId = homes
+      this.create(identity, payload)
+    },
     async assignHome(identity, homeId) {
       const payload = (await this.getById(identity)).data
       payload.homeId.push(homeId)
