@@ -4,20 +4,20 @@
       <v-col cols="6" style="height: 100%" class="px-2 pt-2 pb-5">
         <div
           class="item-1 rounded-l-xl"
-          :style="`background-image: url(${images[0]})`"
+          :style="`background-image: url(${getImageUrl(images[0])})`"
         ></div>
       </v-col>
       <v-col cols="6">
         <v-row no-gutters style="height: 36.625rem">
           <v-col
-            v-for="(image, index) in images.slice(1)"
-            :key="index"
+            v-for="(publicId, index) in images.slice(1)"
+            :key="publicId"
             cols="6"
             style="height: 50%"
             class="pa-2"
           >
             <div
-              :style="`background-image: url(${image})`"
+              :style="`background-image: url(${getImageUrl(publicId)})`"
               class="items"
               :class="[
                 index === 1 && 'rounded-tr-xl',
@@ -38,6 +38,19 @@ export default {
     images: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    getImageUrl(publicId) {
+      return this.$img(
+        publicId,
+        {
+          width: 600,
+        },
+        {
+          provider: 'cloudinary',
+        }
+      )
     },
   },
 }
