@@ -28,5 +28,11 @@ export default {
       filters: `homeId:${homeId}`,
       attributesToHighlight: []
     })
+  },
+  getHomes() {
+    return apiCall.post(`/homes/query`, {
+      hitsPerPage: 3,
+      attributesToHighlight: []
+    })
   }
 }
