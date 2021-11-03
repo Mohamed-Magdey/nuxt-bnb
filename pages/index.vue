@@ -16,6 +16,7 @@
 
 <script>
 import Api from '@/services/Api'
+import handleError from '@/utils/handleError'
 
 export default {
   data() {
@@ -28,13 +29,7 @@ export default {
       const response = await Api.getHomes()
       this.homes = response.data.hits
     } catch (e) {
-      const err = {
-        statusCode: e.response?.status || 500,
-        message: e.response?.statusText || 'Internal Server Error',
-        status: e.response?.status || 500,
-      }
-      this.$nuxt.context.error(err)
-      throw err
+      handleError(e, this)
     }
   },
   head() {

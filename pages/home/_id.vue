@@ -15,6 +15,7 @@
 
 <script>
 import Api from '@/services/Api'
+import handleError from '@/utils/handleError'
 
 export default {
   name: 'Property',
@@ -37,13 +38,7 @@ export default {
       this.reviews = responses[1].data.hits
       this.user = responses[2].data.hits[0]
     } catch (e) {
-      const err = {
-        statusCode: e.response?.status || 500,
-        message: e.response?.statusText || 'Internal Server Error',
-        status: e.response?.status || 500,
-      }
-      this.$nuxt.context.error(err)
-      throw err
+      handleError(e, this)
     }
   },
   head() {
