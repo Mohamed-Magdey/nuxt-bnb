@@ -1,21 +1,12 @@
 <template>
   <v-card elevation="0" rounded="0">
-    <v-img
-      lazy-src="https://picsum.photos/id/11/100/60"
-      max-width="300"
-      max-height="200"
+    <nuxt-img
       :src="home.images[0]"
       :alt="home.title"
-    >
-      <template #placeholder>
-        <v-row class="fill-height ma-0" align="center" justify="center">
-          <v-progress-circular
-            indeterminate
-            color="grey lighten-5"
-          ></v-progress-circular>
-        </v-row>
-      </template>
-    </v-img>
+      width="300"
+      height="200"
+      provider="cloudinary"
+    /><br />
     {{ home.title }}<br />
     {{ home.location.address }} {{ home.location.city }} {{ home.location.state
     }}<br />
