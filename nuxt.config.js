@@ -42,6 +42,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxt/image'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -57,6 +58,12 @@ export default {
 
   cloudinary: {
     cloudName: process.env.CLOUDINARY_NAME
+  },
+
+  image: {
+    cloudinary: {
+      baseURL: `https://res.cloudinary.com/${process.env.CLOUDINARY_NAME}/image/upload/`
+    }
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
