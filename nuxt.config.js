@@ -31,7 +31,8 @@ export default {
   plugins: [
     '@/plugins/base.js',
     '@/plugins/auth.client.js',
-    '@/plugins/vCalendar.client.js'
+    '@/plugins/vCalendar.client.js',
+    '@/plugins/stripe.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
