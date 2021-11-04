@@ -1,4 +1,4 @@
-import { getAxiosInstance } from '../helpers'
+import { getAxiosInstance } from '../../helpers'
 import userApi from './user'
 import homesApi from './homes'
 
