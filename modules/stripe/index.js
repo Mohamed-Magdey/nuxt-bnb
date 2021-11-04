@@ -24,8 +24,8 @@ export default function () {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      success_url: `https://localhost:3000/home/${body.homeId}/?result=success`,
-      cancel_url: `https://localhost:3000/home/${body.homeId}`,
+      success_url: `http://localhost:3000/home/${body.homeId}/?result=success`,
+      cancel_url: `http://localhost:3000/home/${body.homeId}`,
       line_items: [{
         quantity: 1,
         price_data: {
