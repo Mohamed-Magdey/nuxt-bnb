@@ -73,6 +73,7 @@
         :key="index + 100"
         v-model="home.availabilityRanges[index]"
         is-range
+        :is-dark="$vuetify.theme.isDark"
         timezone="UTC"
         :model-config="{ timeAdjust: '00:00:00' }"
       >
