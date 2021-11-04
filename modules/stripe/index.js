@@ -1,6 +1,6 @@
 import stripLib from 'stripe'
 import { rejectHitBadRequest, sendJSON } from '../helpers'
-import getApis from './apis'
+import getApis from '../algolia/apis'
 
 export default function () {
   const algoliaConfig = this.options.privateRuntimeConfig.algolia
