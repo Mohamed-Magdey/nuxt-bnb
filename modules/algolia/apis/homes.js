@@ -1,5 +1,12 @@
 export default (apiCall) => {
   return {
+    get: async (homeId) => {
+      try {
+        return await apiCall.get(`/homes/${homeId}`)
+      } catch (err) {
+        return err
+      }
+    },
     delete: async (homeId) => {
       try {
         return await apiCall.delete(`/homes/${homeId}`)
