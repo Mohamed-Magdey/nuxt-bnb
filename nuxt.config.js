@@ -54,7 +54,8 @@ export default {
     '@/modules/auth',
     '@/modules/algolia',
     '@/modules/cloudinary',
-    '@nuxtjs/cloudinary'
+    '@nuxtjs/cloudinary',
+    '@/modules/stripe'
   ],
 
   cloudinary: {
