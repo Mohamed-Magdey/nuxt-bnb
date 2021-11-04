@@ -77,7 +77,9 @@
             </template>
           </date-picker>
         </client-only>
-        <v-btn color="primary" block x-large>Request to book!</v-btn>
+        <v-btn color="primary" block x-large @click="checkout"
+          >Request to book!</v-btn
+        >
       </v-col>
     </v-row>
   </v-container>
@@ -102,8 +104,19 @@ export default {
       },
     }
   },
+  mounted() {
+    if (this.$route.query.result === 'success') {
+      alert('Success')
+    }
+  },
   methods: {
     pluralize,
+    checkout() {
+      const start = this.range.start.getTime() / 1000
+      const end = this.range.end.getTime() / 1000
+
+      this.$stripe.checkout(this.home.objectID, start, end)
+    },
   },
 }
 </script>
