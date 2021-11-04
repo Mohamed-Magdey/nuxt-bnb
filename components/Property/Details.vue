@@ -29,11 +29,54 @@
       </v-col>
       <v-col cols="5" class="pl-10">
         <div class="price">${{ home.pricePerNight }}<span> / night</span></div>
-        <div class="search d-flex justify-space-between">
-          <BaseDatePicker :menu="menu1" :check="checkIn" label="Check in" />
-          <v-spacer></v-spacer>
-          <BaseDatePicker :menu="menu2" :check="checkOut" label="Check out" />
-        </div>
+        <client-only>
+          <date-picker
+            v-model="range"
+            is-range
+            :is-dark="$vuetify.theme.isDark"
+            timezone="UTC"
+            :model-config="{ timeAdjust: '00:00:00' }"
+          >
+            <template #default="{ inputValue, inputEvents }">
+              <v-row>
+                <v-col cols="12" sm="6">
+                  <v-text-field
+                    outlined
+                    dense
+                    :value="inputValue.start"
+                    v-on="inputEvents.start"
+                  >
+                    <template #append>
+                      <v-icon
+                        :value="inputValue.start"
+                        color="primary"
+                        v-on="inputEvents.start"
+                        >mdi-calendar-month</v-icon
+                      >
+                    </template>
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field
+                    outlined
+                    dense
+                    :value="inputValue.end"
+                    v-on="inputEvents.end"
+                  >
+                    <template #append>
+                      <v-icon
+                        :value="inputValue.end"
+                        color="primary"
+                        v-on="inputEvents.end"
+                        >mdi-calendar-month</v-icon
+                      >
+                    </template>
+                  </v-text-field>
+                </v-col>
+              </v-row>
+            </template>
+          </date-picker>
+        </client-only>
         <v-btn color="primary" block x-large>Request to book!</v-btn>
       </v-col>
     </v-row>
@@ -53,10 +96,10 @@ export default {
   },
   data() {
     return {
-      menu1: false,
-      checkIn: '',
-      menu2: false,
-      checkOut: '',
+      range: {
+        start: null,
+        end: null,
+      },
     }
   },
   methods: {
@@ -90,8 +133,5 @@ export default {
   color: #88a2d2;
   font-weight: 400;
   font-size: 30px;
-}
-.mdi-calendar {
-  color: blue;
 }
 </style>
