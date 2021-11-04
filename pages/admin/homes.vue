@@ -68,6 +68,30 @@
         type="text"
         label="Country"
       />
+      <date-picker
+        v-for="(range, index) in home.availabilityRanges"
+        :key="index + 100"
+        v-model="home.availabilityRanges[index]"
+        is-range
+        timezone="UTC"
+        :model-config="{ timeAdjust: '00:00:00' }"
+      >
+        <template #default="{ inputValue, inputEvents }">
+          <v-text-field
+            outlined
+            dense
+            :value="inputValue.start"
+            v-on="inputEvents.start"
+          />
+          to
+          <v-text-field
+            outlined
+            dense
+            :value="inputValue.end"
+            v-on="inputEvents.end"
+          />
+        </template>
+      </date-picker>
       <v-btn type="submit" color="primary">Add</v-btn>
     </v-form>
   </v-container>
@@ -103,6 +127,16 @@ export default {
           lng: '',
         },
         images: [],
+        availabilityRanges: [
+          {
+            start: '',
+            end: '',
+          },
+          {
+            start: '',
+            end: '',
+          },
+        ],
       },
     }
   },
