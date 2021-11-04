@@ -22,6 +22,7 @@
     "nuxt": "^2.15.7",
     "nuxt-leaflet": "^0.0.25",
     "uuid": "^8.3.2",
+    "v-calendar": "^2.3.4",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
