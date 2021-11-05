@@ -66,6 +66,7 @@ export default {
           property: 'og:url',
           content: `${process.env.rootUrl}/home/${this.home.objectID}`,
         },
+        { hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },
       ],
     }
   },
