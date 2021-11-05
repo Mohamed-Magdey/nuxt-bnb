@@ -1,7 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  rootUrl: process.env.NODE_ENV === 'production' ? 'https://nuxt-bnb-two.vercel.app' : 'http://localhost:3000',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: 'Mastering Nuxt: %s',
@@ -98,6 +97,7 @@ export default {
   },
 
   env: {
+    rootUrl: process.env.NODE_ENV === 'production' ? 'https://nuxt-bnb-two.vercel.app' : 'http://localhost:3000',
     baseUrl: process.env.BASE_URL,
     appId: process.env.ALGOLIA_APP_ID,
     apiKey: process.env.API_KEY,
