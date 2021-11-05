@@ -1,5 +1,13 @@
 export default (apiCall) => {
   return {
+    bookHome: (identityId, homeId, start, end) => {
+      return apiCall.post(`/bookings/`, {
+        identityId,
+        homeId,
+        start,
+        end
+      })
+    },
     async removeHome(identity, homeId) {
       const payload = (await this.getById(identity)).data
       const homes = payload.homeId.filter(id => id !== homeId)
