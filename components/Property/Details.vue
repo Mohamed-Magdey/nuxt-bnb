@@ -112,6 +112,15 @@ export default {
   methods: {
     pluralize,
     checkout() {
+      if (!this.range.start) {
+        alert('Please select start & end date.')
+        return
+      }
+      if (!this.$store.state.auth.isLoggedIn) {
+        alert('You must sign in to book your night(s).')
+        return
+      }
+
       const start = this.range.start.getTime() / 1000
       const end = this.range.end.getTime() / 1000
 
