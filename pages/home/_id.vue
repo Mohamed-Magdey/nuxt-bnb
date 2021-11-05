@@ -10,6 +10,7 @@
     <PropertyMap :home="home" />
     <PropertyReviews :reviews="reviews" />
     <PropertyHost :user="user" />
+    <script type="application/ld+json" v-html="getSchema"></script>
   </v-container>
 </template>
 
@@ -71,6 +72,32 @@ export default {
         { hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },
       ],
     }
+  },
+  computed: {
+    getSchema() {
+      return JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BesAndBreakfast',
+        name: this.home.title,
+        image: this.$img(
+          this.home.images[0],
+          { width: 1200 },
+          { provider: 'cloudinary' }
+        ),
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: this.home.location.city,
+          addressRegion: this.home.location.state,
+          postalCode: this.home.location.postalCode,
+          streetAddress: this.home.location.address,
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: this.home.reviewValue,
+          reviewCount: this.home.reviewCount,
+        },
+      })
+    },
   },
 }
 </script>
