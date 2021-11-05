@@ -1,7 +1,9 @@
 <template>
   <v-app-bar app absolute>
     <v-app-bar-title class="mx-2">
-      <v-img src="/images/logo.svg" class="mb-3" />
+      <nuxt-link to="/">
+        <v-img src="/images/logo.svg" class="mb-3" />
+      </nuxt-link>
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <v-btn to="/" text>Home</v-btn>
@@ -9,7 +11,9 @@
     <div class="d-flex align-center mx-2">
       <template v-if="isLoggedIn">
         <v-img src="/images/icons/house.svg"></v-img>
-        <div class="name">{{ user.fullName }}</div>
+        <nuxt-link to="/admin" class="name" :style="`color: #${userColor}`">
+          {{ user.fullName }}
+        </nuxt-link>
         <v-avatar>
           <img :src="user.profileUrl" :alt="user.fullName" />
         </v-avatar>
@@ -31,6 +35,9 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.isLoggedIn
     },
+    userColor() {
+      return this.$vuetify.theme.isDark ? 'FFFFFF' : '000000DE'
+    },
   },
   methods: {
     toggleTheme() {
@@ -43,6 +50,10 @@ export default {
 <style scoped>
 .name {
   margin: 0 32px 0 6px;
+  text-decoration: none;
+}
+.name:hover {
+  text-decoration: underline;
 }
 .v-avatar img {
   border-style: solid;
