@@ -77,7 +77,7 @@ export default {
     getSchema() {
       return JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'BesAndBreakfast',
+        '@type': 'BedAndBreakfast',
         name: this.home.title,
         image: this.$img(
           this.home.images[0],
