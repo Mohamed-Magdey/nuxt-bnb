@@ -77,7 +77,7 @@ export default {
     exclude: [
       '/admin/**'
     ]
-  }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
