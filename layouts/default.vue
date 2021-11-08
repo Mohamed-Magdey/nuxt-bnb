@@ -1,15 +1,12 @@
 <template>
   <v-app>
     <Header />
-    <v-main>
+    <v-main class="mb-10">
       <Nuxt />
     </v-main>
+    <Footer />
   </v-app>
 </template>
-
-<script>
-export default {}
-</script>
 
 <style>
 h2 {
