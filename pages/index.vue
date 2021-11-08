@@ -74,7 +74,8 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'This is a homepage',
+          content:
+            'NuxtBNB is an AirBNB app that uses Nuxt, Cloudinary, Stripe, Google Apis and Algolia.',
         },
       ],
     }
