@@ -2,9 +2,13 @@
   <v-container tag="section">
     <v-row class="mt-10">
       <v-col
-        cols="6"
+        md="6"
+        cols="12"
         class="pr-10"
-        style="border-right: 1px dashed rgba(151, 151, 151)"
+        :style="
+          $vuetify.breakpoint.smAndDown ||
+          'border-right: 1px dashed rgba(151, 151, 151)'
+        "
       >
         <h1 class="text-color--text mb-5">{{ home.title }}</h1>
         <div class="details d-flex justify-space-between align-center">
@@ -27,7 +31,7 @@
           {{ pluralize(home.bathrooms, 'bath') }}
         </div>
       </v-col>
-      <v-col cols="5" class="pl-10">
+      <v-col md="5" cols="12" class="pl-10">
         <div class="price">${{ home.pricePerNight }}<span> / night</span></div>
         <client-only>
           <date-picker
@@ -44,6 +48,7 @@
                     outlined
                     dense
                     :value="inputValue.start"
+                    label="Check In"
                     v-on="inputEvents.start"
                   >
                     <template #append>
@@ -61,6 +66,7 @@
                     outlined
                     dense
                     :value="inputValue.end"
+                    label="Check Out"
                     v-on="inputEvents.end"
                   >
                     <template #append>
