@@ -57,7 +57,8 @@ export default {
     '@/modules/cloudinary',
     '@nuxtjs/cloudinary',
     '@/modules/stripe',
-    '@nuxtjs/robots'
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap'
   ],
 
   cloudinary: {
@@ -69,6 +70,14 @@ export default {
       baseURL: `https://res.cloudinary.com/${process.env.CLOUDINARY_NAME}/image/upload/`
     }
   },
+
+  sitemap: {
+    hostname: process.env.NODE_ENV === 'production' ? 'https://nuxt-bnb-two.vercel.app' : 'http://localhost:3000',
+    gzip: true,
+    exclude: [
+      '/admin/**'
+    ]
+  }
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
