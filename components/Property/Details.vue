@@ -55,6 +55,7 @@
                       <v-icon
                         :value="inputValue.start"
                         color="primary"
+                        size="30"
                         v-on="inputEvents.start"
                         >mdi-calendar-month</v-icon
                       >
@@ -73,6 +74,7 @@
                       <v-icon
                         :value="inputValue.end"
                         color="primary"
+                        size="30"
                         v-on="inputEvents.end"
                         >mdi-calendar-month</v-icon
                       >

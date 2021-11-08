@@ -50,6 +50,11 @@ export default {
     return {
       title: this.home?.title,
       meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.home?.description,
+        },
         { hid: 'og-type', property: 'og:type', content: 'website' },
         { hid: 'og-title', property: 'og:title', content: this.home?.title },
         {
