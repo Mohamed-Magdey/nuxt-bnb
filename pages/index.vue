@@ -19,10 +19,22 @@
       :style="`backgroundColor: ${CardsColor}`"
       class="py-20"
     >
-      <v-col>
+      <v-col cols="8" :class="$vuetify.breakpoint.xs ? '' : 'mx-auto'">
         <h2 class="text-color--text">Recently Added</h2>
-        <v-row class="justify-space-between">
-          <v-col v-for="home in homes" :key="home.objectID" cols="12" sm="3">
+        <v-row
+          :class="
+            $vuetify.breakpoint.mdAndDown
+              ? 'justify-center'
+              : 'justify-space-between'
+          "
+        >
+          <v-col
+            v-for="home in homes"
+            :key="home.objectID"
+            cols="12"
+            sm="4"
+            style="max-width: 385px; min-wdith: 385px"
+          >
             <nuxt-link :to="`/home/${home.objectID}`" prefetch>
               <home-card :home="home" />
             </nuxt-link>
