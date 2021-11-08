@@ -71,6 +71,11 @@ export default {
     }
   },
 
+  robots: {
+    UserAgent: '*',
+    Disallow: '/admin',
+  },
+
   sitemap: {
     hostname: process.env.NODE_ENV === 'production' ? 'https://nuxt-bnb-two.vercel.app' : 'http://localhost:3000',
     gzip: true,
