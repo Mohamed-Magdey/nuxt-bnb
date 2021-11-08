@@ -10,13 +10,39 @@
     <v-btn text @click="toggleTheme">{{ toggleDark }}</v-btn>
     <div class="d-flex align-center mx-2">
       <template v-if="isLoggedIn">
-        <v-img src="/images/icons/house.svg"></v-img>
-        <nuxt-link to="/admin" class="name" :style="`color: #${userColor}`">
-          {{ user.fullName }}
-        </nuxt-link>
-        <v-avatar>
-          <img :src="user.profileUrl" :alt="user.fullName" />
-        </v-avatar>
+        <v-row justify="center">
+          <v-menu bottom min-width="200px" rounded offset-y>
+            <template #activator="{ on }">
+              <v-btn icon x-large v-on="on">
+                <v-avatar>
+                  <img :src="user.profileUrl" :alt="user.fullName" />
+                </v-avatar>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-list-item-content class="justify-center">
+                <div class="mx-auto text-center">
+                  <v-avatar>
+                    <img :src="user.profileUrl" :alt="user.fullName" />
+                  </v-avatar>
+                  <h3>
+                    <nuxt-link
+                      to="/admin"
+                      class="name"
+                      :style="`color: #${userColor}`"
+                    >
+                      {{ user.fullName }}
+                    </nuxt-link>
+                  </h3>
+                  <v-divider class="my-3"></v-divider>
+                  <v-btn depressed to="/admin" text> Admin </v-btn>
+                  <v-divider class="my-3"></v-divider>
+                  <v-btn text @click="signout"> Signout </v-btn>
+                </div>
+              </v-list-item-content>
+            </v-card>
+          </v-menu>
+        </v-row>
       </template>
       <div v-show="!isLoggedIn" id="googleButton"></div>
     </div>
@@ -43,13 +69,18 @@ export default {
     toggleTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     },
+    signout() {
+      this.$nuxt.$auth.signOut()
+      this.$router.push({
+        name: 'index',
+      })
+    },
   },
 }
 </script>
 
 <style scoped>
 .name {
-  margin: 0 32px 0 6px;
   text-decoration: none;
 }
 .name:hover {
