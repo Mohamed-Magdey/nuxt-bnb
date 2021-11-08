@@ -2,7 +2,7 @@
   <v-app-bar app absolute>
     <v-app-bar-title class="mx-2">
       <nuxt-link to="/">
-        <v-img src="/images/logo.svg" class="mb-3" />
+        <v-img src="/images/logo.svg" width="180" alt="logo" class="mb-3" />
       </nuxt-link>
     </v-app-bar-title>
     <v-spacer></v-spacer>
