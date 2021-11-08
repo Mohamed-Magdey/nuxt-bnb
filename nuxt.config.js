@@ -56,7 +56,8 @@ export default {
     '@/modules/algolia',
     '@/modules/cloudinary',
     '@nuxtjs/cloudinary',
-    '@/modules/stripe'
+    '@/modules/stripe',
+    '@nuxtjs/robots'
   ],
 
   cloudinary: {
