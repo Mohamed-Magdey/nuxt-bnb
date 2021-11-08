@@ -2,9 +2,14 @@
   <v-container :style="`backgroundColor: ${containerColor}`" tag="section">
     <v-row>
       <v-col
-        cols="6"
+        cols="12"
+        md="6"
         class="py-20 pr-10"
-        style="border-right: 1px dashed rgba(151, 151, 151)"
+        :style="
+          $vuetify.breakpoint.smAndDown
+            ? 'border-bottom: 1px dashed rgba(151, 151, 151)'
+            : 'border-right: 1px dashed rgba(151, 151, 151)'
+        "
       >
         <h2
           class="text-color--text headline"
@@ -14,7 +19,7 @@
         </h2>
         <BaseParagraph :text="home.description" />
       </v-col>
-      <v-col cols="6" class="py-20 pl-10" style="padding-right: 105px">
+      <v-col md="6" cols="12" class="py-20 pl-10" style="padding-right: 105px">
         <v-chip
           v-for="(feature, index) in home.features"
           :key="index"
