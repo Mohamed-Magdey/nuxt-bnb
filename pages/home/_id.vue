@@ -1,6 +1,10 @@
 <template>
   <v-container v-if="$fetchState.pending" fluid>
-    Fetching mountains...
+    <v-skeleton-loader
+      class="mx-auto"
+      max-width="500"
+      type="image"
+    ></v-skeleton-loader>
   </v-container>
   <error v-else-if="$fetchState.error" :error="$fetchState.error" />
   <v-container v-else>
