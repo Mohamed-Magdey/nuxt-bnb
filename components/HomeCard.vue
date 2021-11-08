@@ -16,7 +16,7 @@
       ${{ home.pricePerNight }}<span> / night</span>
     </div>
     <div class="card-footer pa-5">
-      <img src="/images/icons/house-blue.svg" width="16" />
+      <img src="/images/icons/house-blue.svg" alt="home-icon" width="16" />
       <v-spacer />
       <v-icon color="indigo" size="20">mdi-account-multiple</v-icon>
       {{ home.guests }} guests
