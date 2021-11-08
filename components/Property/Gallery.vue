@@ -1,6 +1,14 @@
 <template>
   <v-container tag="section">
-    <v-row no-gutters style="height: 37.375rem">
+    <v-carousel v-if="$vuetify.breakpoint.smAndDown">
+      <v-carousel-item
+        v-for="publicId in images"
+        :key="publicId"
+        :src="getImageUrl(publicId)"
+      >
+      </v-carousel-item>
+    </v-carousel>
+    <v-row v-else no-gutters style="height: 37.375rem">
       <v-col cols="6" style="height: 100%" class="px-2 pt-2 pb-5">
         <div
           class="item-1 rounded-l-xl"
