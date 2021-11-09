@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container fluid>
+    <v-container fluid class="d-flex flex-column align-center">
       <h1 v-if="error.statusCode === 404">
         {{ pageNotFound }}
       </h1>

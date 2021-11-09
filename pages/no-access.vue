@@ -1,3 +1,5 @@
 <template>
-  <v-container> No Access! Login! </v-container>
+  <v-container fluid class="d-flex flex-column align-center">
+    No Access! Login First!
+  </v-container>
 </template>
